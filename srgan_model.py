@@ -5,7 +5,7 @@ from ops import *
 
 class Generator(nn.Module):
     
-    def __init__(self, img_feat = 3, n_feats = 64, kernel_size = 3, num_block = 16, act = nn.PReLU(), scale=4):
+    def __init__(self, img_feat = 3, n_feats = 64, kernel_size = 3, num_block = 16, act = nn.PReLU(), scale=2):
         super(Generator, self).__init__()
         
         self.conv01 = conv(in_channel = img_feat, out_channel = n_feats, kernel_size = 9, BN = False, act = act)
@@ -15,11 +15,10 @@ class Generator(nn.Module):
         
         self.conv02 = conv(in_channel = n_feats, out_channel = n_feats, kernel_size = 3, BN = True, act = None)
         
-        if(scale == 4):
-            upsample_blocks = [Upsampler(channel = n_feats, kernel_size = 3, scale = 2, act = act) for _ in range(2)]
-        else:
-            upsample_blocks = [Upsampler(channel = n_feats, kernel_size = 3, scale = scale, act = act)]
-       
+        #if(scale == 4):
+            #upsample_blocks = [Upsampler(channel = n_feats, kernel_size = 3, scale = 2, act = act) for _ in range(2)]
+        #else:
+        upsample_blocks = [Upsampler(channel = n_feats, kernel_size = 3, scale = 2, act = act)]
 
         self.tail = nn.Sequential(*upsample_blocks)
         
@@ -50,7 +49,6 @@ class Discriminator(nn.Module):
         
         body = [discrim_block(in_feats = n_feats * (2 ** i), out_feats = n_feats * (2 ** (i + 1)), kernel_size = 3, act = self.act) for i in range(num_of_block)]    
         self.body = nn.Sequential(*body)
-        
         self.linear_size = ((patch_size // (2 ** (num_of_block + 1))) ** 2) * (n_feats * (2 ** num_of_block))
         
         tail = []

@@ -8,7 +8,7 @@ def str2bool(v):
     return v.lower() in ('true')
 
 #parser.add_argument("--LR_path", type = str, default = 'C:/Users/jihun/SRGAN-PyTorch/dataset/DIV2K/DIV2K_train_LR_bicubic/X4')
-parser.add_argument("--LR_path", type = str, default = 'C:/Users/USER/Equalization/set01_V001_clahe')
+parser.add_argument("--LR_path", type = str, default = 'C:/Users/USER/Bicubic/set01_V001_lwir')
 #parser.add_argument("--LR_path", type = str, default = 'C:/Users/jihun/SRGAN-PyTorch/dataset/DIV2K/DIV2K_train_LR_bicubic/x2')
 #parser.add_argument("--LR_path", type = str, default = 'C:/Users/jihun/SRGAN-PyTorch/dataset/DIV2K/DIV2K_train_LR_x8')
 #parser.add_argument("--GT_path", type = str, default = 'C:/Users/jihun/SRGAN-PyTorch/dataSet/DIV2K/DIV2K_train_HR/')
